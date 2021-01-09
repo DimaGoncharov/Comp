@@ -85,7 +85,7 @@ class Cmp():
 				continue
 			m = reg_pol.match(eq, pos)
 			if m == None or len(m.group(0)) <= 0:
-				print("\033[31mUnexpected syntax: '%s'\033[39m" % (eq[pos:pos + 5]))
+				print("Unexpected syntax: '%s'" % (eq[pos:pos + 5]))
 				return False
 			try:
 				p = Pol(m)
@@ -95,7 +95,7 @@ class Cmp():
 					elif not left and len(self.right) > 0:
 						p.sign = "+"
 			except:
-				print("\033[31mInvalid syntax: '%s'\033[39m" % (eq[pos:pos + 5]))
+				print("Invalid syntax: '%s'" % (eq[pos:pos + 5]))
 				return False
 			if left:
 				self.left.append(p)
@@ -104,12 +104,12 @@ class Cmp():
 			pos += len(m.group(0))
 		if len(self.left) == 0:
 			if len(self.right) == 0:
-				print("\033[31mBad argument\033[39m")
+				print("Bad argument")
 				return False
 			self.left.append(Pol(None))
 		if len(self.right) == 0:
 			self.right.append(Pol(None))
-		print("Equation: \033[36m" + self.toString() + "\033[39m")
+		print("Equation: " + self.toString() + "")
 		return True
 
 	def reduce(self):
@@ -129,7 +129,7 @@ class Cmp():
 		self.right = [Pol(None)]
 		if len(self.left) == 0:
 			self.left.append(Pol(None))
-		print("Reduced form: \033[36m" + self.toString() + "\033[39m")
+		print("Reduced form: " + self.toString() + "")
 		return True
 
 	def resolve(self):
@@ -137,13 +137,13 @@ class Cmp():
 		for p in self.left:
 			if p.power > degree:
 				degree = p.power
-		print("Polynomial degree: \033[32m%d\033[39m" % degree)
+		print("Polynomial degree: %d" % degree)
 		if degree == 0:
 			a = self.left[0].getNum()
 			if a == 0:
 				print("\033[32mEvery real are solution\033[39m")
 			else:
-				print("\033[31mNo solution\033[39m")
+				print("No solution")
 			return False
 		elif degree == 1:
 			if len(self.left) > 1:
@@ -152,10 +152,10 @@ class Cmp():
 			else:
 				b = 0
 				a = self.left[0].getNum()
-			print("\033[90ma = " + str(a) + "\033[39m")
-			print("\033[90mb = " + str(b) + "\033[39m")
+			print("\033[94ma = " + str(a) + "\033[39m")
+			print("\033[94mb = " + str(b) + "\033[39m")
 			print("The solution is:")
-			print("\033[90m-b / a = \033[32m" + str(-b / a) + "\033[39m")
+			print("\033[94m-b / a = \033[32m" + str(-b / a) + "\033[39m")
 		elif degree == 2:
 			if len(self.left) > 2:
 				c = self.left[0].getNum()
@@ -169,25 +169,25 @@ class Cmp():
 				c = 0
 				b = 0
 				a = self.left[0].getNum()
-			print("\033[90ma = " + str(a) + "\033[39m")
-			print("\033[90mb = " + str(b) + "\033[39m")
-			print("\033[90mc = " + str(c) + "\033[39m")
+			print("\033[94ma = " + str(a) + "\033[39m")
+			print("\033[94mb = " + str(b) + "\033[39m")
+			print("\033[94mc = " + str(c) + "\033[39m")
 			d = b ** 2 - (4 * a * c)
-			print("\033[90md = " + str(d) + "\033[39m")
+			print("\033[94md = " + str(d) + "\033[39m")
 			if d > 0:
 				print("Discriminant is strictly positive, the two solutions are:")
-				print("\033[90m(-b - (d ** 0.5)) / (2 * a) = \033[32m" + str((-b - (d ** 0.5)) / (2 * a)) + "\033[39m")
-				print("\033[90m(-b + (d ** 0.5)) / (2 * a) = \033[32m" + str((-b + (d ** 0.5)) / (2 * a)) + "\033[39m")
+				print("\033[94m(-b - (d ** 0.5)) / (2 * a) = \033[32m" + str((-b - (d ** 0.5)) / (2 * a)) + "\033[39m")
+				print("\033[94m(-b + (d ** 0.5)) / (2 * a) = \033[32m" + str((-b + (d ** 0.5)) / (2 * a)) + "\033[39m")
 			else:
 				if d == 0:
 					print("Discriminant is 0, the solution is:")
-					print("\033[90m-b / (2 * a) = \033[32m" + str(-b / (2 * a)))
+					print("\033[94m-b / (2 * a) = \033[32m" + str(-b / (2 * a)))
 				else:
 					print("Discriminant is strictly negative, the two solutions are:")
-					print("\033[90m(-b - (d ** 0.5)) / (2 * a) = \033[32m" + str((-b - (abs(d) ** 0.5)) / (2 * a)) + "i\033[39m")
-					print("\033[90m(-b + (d ** 0.5)) / (2 * a) = \033[32m" + str((-b + (abs(d) ** 0.5)) / (2 * a)) + "i\033[39m")
+					print("\033[94m(-b - (d ** 0.5)) / (2 * a) = \033[32m" + str((-b - (abs(d) ** 0.5)) / (2 * a)) + "i\033[39m")
+					print("\033[94m(-b + (d ** 0.5)) / (2 * a) = \033[32m" + str((-b + (abs(d) ** 0.5)) / (2 * a)) + "i\033[39m")
 		else:
-			print("\033[31mThe polynomial degree is stricly greater than 2, I can't solve.\033[39m")
+			print("\033[31mThe polynomial degree is strictly greater than 2, I can't solve.\033[39m")
 			return False
 		return True
 
@@ -204,7 +204,7 @@ class Cmp():
 
 
 if len(argv) <= 1:
-	print("\033[31mNot enougth argument\033[39m")
+	print("Not enough argument")
 else:
 	c = Cmp()
 	if not c.parse(argv[1]):
